@@ -1,6 +1,7 @@
 import pytest
 from board import Board
 from move import Move
+from copy import deepcopy
 
 """
 TODO:
@@ -54,6 +55,31 @@ def test_apply_move():
     print("________________________________\n")
 
 
+def test_undo():
+    print("\n________________________________")
+    print("test_undo")
+    board = Board()
+    board.print()
+    test_board = deepcopy(board)
+    board.apply_move(Move(1, 3), 2)
+    board.undo()
+    assert board.board == test_board.board
+    assert board.player_pos == test_board.player_pos
+    print("________________________________\n")
+
+
+def test_get_pips():
+    print("\n________________________________")
+    print("test_get_pips")
+    board = Board()
+    board.print()
+    assert board.get_pips(1) == 167
+    assert board.get_pips(2) == 167
+    print("________________________________\n")
+
+
 if __name__ == '__main__':
-    test_board_setup()
-    test_apply_move()
+    # test_board_setup()
+    # test_apply_move()
+    # test_undo()
+    test_get_pips()
